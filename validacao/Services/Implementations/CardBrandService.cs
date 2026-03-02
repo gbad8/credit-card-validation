@@ -1,4 +1,4 @@
-﻿namespace validacao.Service
+﻿namespace validacao.Services.Implementations
 {
     public static class CardBrandService
     {

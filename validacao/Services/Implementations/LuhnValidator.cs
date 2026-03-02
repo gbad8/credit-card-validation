@@ -1,5 +1,7 @@
 ﻿using System.Linq;
 
+namespace validacao.Services.Implementations;
+
 public static class LuhnValidator
 {
     public static bool IsValid(string cardNumber)

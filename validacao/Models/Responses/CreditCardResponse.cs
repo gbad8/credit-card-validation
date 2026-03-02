@@ -1,4 +1,4 @@
-﻿namespace validacao.Model
+﻿namespace validacao.Models.Responses
 {
     public class CreditCardResponse
     {

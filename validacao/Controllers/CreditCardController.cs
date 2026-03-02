@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using validacao.Model;
-using validacao.Service;
+using validacao.Models.Requests;
+using validacao.Models.Responses;
+using validacao.Services.Implementations;
 
 namespace CreditCard.Api.Controllers
 {
