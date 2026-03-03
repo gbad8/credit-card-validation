@@ -1,0 +1,18 @@
+# Dockerfile para executar testes
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS test
+WORKDIR /app
+
+# Copy project files
+COPY validacao/*.csproj validacao/
+COPY validacao.Tests/*.csproj validacao.Tests/
+
+# Restore packages
+RUN dotnet restore validacao.Tests/validacao.Tests.csproj
+
+# Copy source code
+COPY validacao/ validacao/
+COPY validacao.Tests/ validacao.Tests/
+
+# Run tests
+WORKDIR /app/validacao.Tests
+CMD ["dotnet", "test", "--logger", "console", "--verbosity", "normal"]
