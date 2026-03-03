@@ -1,26 +1,27 @@
-﻿using System.Linq;
+﻿using validacao.Services.Abstractions;
+using validacao.Services.Utilities;
 
 namespace validacao.Services.Implementations;
 
-public static class LuhnValidator
+public class LuhnValidator : ILuhnValidator
 {
-    public static bool IsValid(string cardNumber)
+    public bool IsValid(string cardNumber)
     {
         if (string.IsNullOrWhiteSpace(cardNumber))
             return false;
 
-        // 🔹 REMOVE TUDO QUE NÃO FOR NÚMERO
-        cardNumber = new string(cardNumber.Where(char.IsDigit).ToArray());
-
-        if (string.IsNullOrEmpty(cardNumber))
+        // Limpar e validar o cartão usando utilitário
+        var cleanedNumber = CardNumberFormatter.Clean(cardNumber);
+        
+        if (string.IsNullOrEmpty(cleanedNumber) || !CardNumberFormatter.IsValidLength(cleanedNumber))
             return false;
 
         int sum = 0;
         bool alternate = false;
 
-        for (int i = cardNumber.Length - 1; i >= 0; i--)
+        for (int i = cleanedNumber.Length - 1; i >= 0; i--)
         {
-            int n = cardNumber[i] - '0'; 
+            int n = cleanedNumber[i] - '0'; 
 
             if (alternate)
             {
